@@ -1,0 +1,12 @@
+num = int(input("Enter a positive integer: "))
+digit_sum = 0
+temp = num 
+digit_list = []
+while temp > 0:
+    digit = temp % 10
+    digit_sum += digit
+    digit_list.append(str(digit))
+    temp //= 10
+digit_list.reverse()
+digit_breakdown = " + ".join(digit_list)
+print(f"The sum of digits is {digit_sum} ({digit_breakdown}).")
