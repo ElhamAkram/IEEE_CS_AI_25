@@ -1,0 +1,9 @@
+sum = 0
+while True:
+    numbers = int(input("Enter a numbers: "))
+    if numbers == -1:
+        break
+    sum += numbers
+print("Sum:", sum)
+
+
