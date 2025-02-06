@@ -1,0 +1,11 @@
+sentence = input("Enter a sentence: ")
+reversed_sentence = ""
+word = ""
+for char in sentence:
+    if char != " ":
+        word = char + word  
+    else:
+        reversed_sentence += word + " "
+        word = ""
+reversed_sentence += word  
+print(reversed_sentence)
