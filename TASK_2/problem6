@@ -1,0 +1,9 @@
+import random
+import string
+password_length = 8
+characters = string.letters + string.digits
+password = ""
+for _ in range(password_length):
+    password += random.choice(characters)
+
+print(password)
