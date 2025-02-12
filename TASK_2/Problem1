@@ -1,0 +1,14 @@
+N = int(input("enter the number of students :"))
+records = []
+
+for _ in range(N):
+    name = input("enter names").strip()
+    grade = float(input("enter grads").strip())
+    records.append([name, grade])
+
+unique_scores = sorted(set(grade for _, grade in records))
+second_lowest_grade = unique_scores[1]
+students = sorted([name for name, grade in records if grade == second_lowest_grade])
+
+for student in students:
+    print(student)
