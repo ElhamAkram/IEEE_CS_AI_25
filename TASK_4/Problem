@@ -1,0 +1,124 @@
+def get_numbers():
+    numbers = []
+
+    while True:
+        num = input("Enter the numbers and write 'done' when finished: ").strip()
+
+        if num.lower() == "done":
+            break
+        
+        try:
+            numbers.append(float(num))
+        except ValueError:
+            print(f"Error: '{num}' is not a valid number.")
+
+    numbers.sort()
+    
+    if not numbers:
+        print("No numbers were entered.")
+        return []
+
+    return numbers
+
+def find_min(numbers):
+    min_value = numbers[0]
+    for num in numbers:
+        if num < min_value:
+            min_value = num
+    return min_value
+
+def find_max(numbers):
+    max_value = numbers[0]
+    for num in numbers:
+        if num > max_value:
+            max_value = num
+    return max_value
+
+def find_mean(numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    return total / len(numbers)
+
+def find_median(numbers):
+    n = len(numbers)
+    mid = n // 2
+    if n % 2 == 0:
+        return (numbers[mid - 1] + numbers[mid]) / 2
+    else:
+        return numbers[mid]
+
+def find_mode(numbers):
+    frequency = {}
+    for num in numbers:
+        frequency[num] = frequency.get(num, 0) + 1
+
+    max_freq = 0
+    modes = []
+    for num, freq in frequency.items():
+        if freq > max_freq:
+            max_freq = freq
+            modes = [num]
+        elif freq == max_freq:
+            modes.append(num)
+
+    if len(modes) == len(numbers):
+        return "No mode"
+    return modes
+
+def find_range(numbers):
+    return find_max(numbers) - find_min(numbers)
+
+def find_variance(numbers):
+    mean = find_mean(numbers)
+    variance = 0
+    for num in numbers:
+        variance += (num - mean) ** 2
+    return variance / len(numbers)
+
+def find_std_dev(numbers):
+    return find_variance(numbers) ** 0.5
+
+def find_quartiles(numbers):
+    n = len(numbers)
+    mid = n // 2
+
+    if n % 2 == 0:
+        lower_half = numbers[:mid]
+        upper_half = numbers[mid:]
+    else:
+        lower_half = numbers[:mid] 
+        upper_half = numbers[mid+1:]
+
+    q1 = find_median(lower_half)
+    q2 = find_median(numbers)
+    q3 = find_median(upper_half)
+    return q1, q2, q3
+
+def find_iqr(numbers):
+    q1, _, q3 = find_quartiles(numbers)
+    return q3 - q1
+
+def main():
+    numbers = get_numbers()
+    if not numbers:
+        print("No calculations to perform.")
+        return
+
+    print("\nStatistics:")
+    print("Numbers:", numbers)
+    print("Min:", find_min(numbers))
+    print("Max:", find_max(numbers))
+    print("Mean:", find_mean(numbers))
+    print("Median:", find_median(numbers))
+    print("Mode:", find_mode(numbers))
+    print("Range:", find_range(numbers))
+    print("Variance:", find_variance(numbers))
+    print("Standard Deviation:", find_std_dev(numbers))
+    q1, q2, q3 = find_quartiles(numbers)
+    print("Q1:", q1)
+    print("Q2 (Median):", q2)
+    print("Q3:", q3)
+    print("IQR:", find_iqr(numbers))
+
+main()
