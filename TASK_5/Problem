@@ -1,0 +1,35 @@
+def sampleStats(count):
+    minimum = None
+    maximum = None
+    total_sum = 0
+    total_count = 0
+    mode = 0
+    max_frequency = 0
+    
+    for i in range(256):
+        if count[i] > 0:
+            if minimum is None:
+                minimum = i
+            maximum = i
+            total_sum += i * count[i]
+            total_count += count[i]
+            if count[i] > max_frequency:
+                max_frequency = count[i]
+                mode = i
+    
+    mean = total_sum / total_count
+    
+    cumulative_count = 0
+    median = 0
+    
+    if total_count % 2 == 1:
+        median_index = total_count // 2 + 1
+        for i in range(256):
+            cumulative_count += count[i]
+            if cumulative_count >= median_index:
+                median = i
+                break
+    else:
+        median_index1 = total_count // 2
+        median_index2 = median_index1 + 1
+        median1 = None
