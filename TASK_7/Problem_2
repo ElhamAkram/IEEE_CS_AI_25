@@ -1,0 +1,18 @@
+def conditional_probability(event_a, event_b):
+    intersection_count = 0
+    a_count = 0
+    
+    for i in range(len(event_a)):
+        if event_a[i] == 1:
+            a_count += 1
+            if event_b[i] == 1:
+                intersection_count += 1
+    
+    if a_count == 0:
+        return 0
+    
+    return intersection_count / a_count
+
+event_a = [1, 0, 1, 0, 1]
+event_b = [1, 1, 0, 0, 1]
+print(conditional_probability(event_a, event_b))
